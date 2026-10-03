@@ -1,0 +1,283 @@
+/* Vereinskarte – Gestaltung. Farben als Variablen, Dunkelmodus folgt dem System. */
+
+:root {
+  --hg: #f5f6f8;
+  --flaeche: #ffffff;
+  --text: #1c2230;
+  --text-leise: #5d6678;
+  --linie: #dde1e8;
+  --akzent: #1f7a4d;
+  --akzent-text: #ffffff;
+  --warn-hg: #fff4d6;
+  --warn-text: #7a5600;
+  --schatten: 0 2px 10px rgba(20, 30, 50, .18);
+  --kopf-hoehe: 56px;
+  --leiste-breite: 400px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hg: #12161d;
+    --flaeche: #1b212b;
+    --text: #e6e9ef;
+    --text-leise: #9aa3b5;
+    --linie: #2e3644;
+    --akzent: #3fb57a;
+    --akzent-text: #0d1a13;
+    --warn-hg: #3a3015;
+    --warn-text: #f0cf7a;
+    --schatten: 0 2px 12px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--hg);
+  color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+a { color: var(--akzent); }
+
+/* ---------- Kopfzeile ---------- */
+
+.kopf {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  min-height: var(--kopf-hoehe);
+  padding: 8px 16px;
+  background: var(--flaeche);
+  border-bottom: 1px solid var(--linie);
+  position: relative;
+  z-index: 1000;
+}
+
+.kopf-titel { font-size: 18px; margin: 0; white-space: nowrap; }
+
+.feld { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-leise); }
+.feld select, .feld input {
+  font: inherit; font-size: 14px; color: var(--text);
+  background: var(--hg); border: 1px solid var(--linie); border-radius: 8px;
+  padding: 5px 8px;
+}
+.feld-suche input { width: 190px; }
+
+.liga-filter { display: flex; gap: 6px; flex-wrap: wrap; }
+.liga-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: inherit; font-size: 13px; color: var(--text);
+  background: var(--hg); border: 1px solid var(--linie); border-radius: 999px;
+  padding: 3px 10px; cursor: pointer;
+}
+.liga-chip small { color: var(--text-leise); }
+.liga-chip[aria-pressed="true"] { border-color: var(--akzent); box-shadow: inset 0 0 0 1px var(--akzent); }
+.liga-chip[aria-pressed="false"] { opacity: .5; text-decoration: line-through; }
+
+/* ---------- Hauptbereich ---------- */
+
+.hauptbereich {
+  position: relative;
+  height: calc(100% - var(--kopf-hoehe));
+  display: flex;
+}
+
+#karte { flex: 1; height: 100%; background: var(--hg); }
+
+.seitenleiste {
+  width: var(--leiste-breite);
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--flaeche);
+  border-left: 1px solid var(--linie);
+  padding: 18px 18px 30px;
+  position: relative;
+}
+.seitenleiste[hidden] { display: none; }
+
+.schliessen {
+  position: sticky; top: 0; float: right;
+  width: 32px; height: 32px; margin: -6px -6px 0 0;
+  border: 0; border-radius: 50%;
+  background: var(--hg); color: var(--text);
+  font-size: 22px; line-height: 1; cursor: pointer; z-index: 2;
+}
+
+/* ---------- Pins ---------- */
+
+.pin-huelle { background: none; border: 0; }
+
+.pin {
+  width: 44px; height: 44px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--f1);
+  box-shadow: var(--schatten);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .15s;
+  position: relative; top: 0;
+}
+.pin-kopf {
+  transform: rotate(45deg);
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.pin.aktiv { transform: rotate(-45deg) scale(1.22); outline: 3px solid var(--akzent); outline-offset: 1px; }
+
+.wappen { object-fit: contain; display: block; }
+.pin-wappen { width: 30px; height: 30px; }
+
+/* Ersatzwappen: zweifarbig geteilter Kreis mit Kürzel */
+.ersatzwappen {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--f1) 0 50%, var(--f2) 50% 100%);
+  color: #fff; font-weight: 700; letter-spacing: -.02em;
+  text-shadow: 0 0 2px #000, 0 0 3px rgba(0,0,0,.7);
+  border: 1px solid rgba(0,0,0,.25);
+  flex: none;
+}
+.ersatzwappen.pin-wappen { width: 34px; height: 34px; font-size: 10px; }
+.ersatzwappen.cluster-wappen { font-size: 0; border: 2px solid var(--flaeche); }
+.ersatzwappen.auswahl-wappen { font-size: 9px; }
+.ersatzwappen.gross { width: 72px; height: 72px; font-size: 18px; }
+
+/* ---------- Cluster ---------- */
+
+.cluster-huelle { background: none; border: 0; }
+.cluster {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--flaeche);
+  border: 3px solid var(--akzent);
+  box-shadow: var(--schatten);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.cluster-stapel { display: flex; }
+.cluster-wappen { width: 22px; height: 22px; margin-left: -8px; border-radius: 50%; }
+img.cluster-wappen { background: #fff; }
+.cluster-wappen:first-child { margin-left: 0; }
+.cluster-zahl {
+  position: absolute; right: -6px; top: -6px;
+  min-width: 22px; height: 22px; padding: 0 6px;
+  border-radius: 11px; background: var(--akzent); color: var(--akzent-text);
+  font-size: 12px; font-weight: 700; line-height: 22px; text-align: center;
+}
+
+/* ---------- Auswahl-Overlay ---------- */
+
+.auswahl-popup .leaflet-popup-content-wrapper,
+.auswahl-popup .leaflet-popup-tip { background: var(--flaeche); color: var(--text); }
+.auswahl-popup .leaflet-popup-content { margin: 10px 8px; }
+.auswahl-titel { font-weight: 600; font-size: 13px; color: var(--text-leise); padding: 0 6px 6px; }
+.auswahl-liste { list-style: none; margin: 0; padding: 0; max-height: 280px; overflow-y: auto; }
+.auswahl-eintrag {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  border: 0; background: none; color: var(--text); font: inherit; text-align: left;
+  padding: 6px; border-radius: 8px; cursor: pointer;
+}
+.auswahl-eintrag:hover, .auswahl-eintrag:focus-visible { background: var(--hg); }
+.auswahl-wappen { width: 28px; height: 28px; }
+.auswahl-text { display: flex; flex-direction: column; line-height: 1.25; }
+.auswahl-text small { color: var(--text-leise); }
+.auswahl-zoom {
+  margin: 8px 6px 0; width: calc(100% - 12px);
+  border: 1px solid var(--linie); background: var(--hg); color: var(--text);
+  border-radius: 8px; padding: 6px; font: inherit; font-size: 13px; cursor: pointer;
+}
+
+/* ---------- Steckbrief ---------- */
+
+.steckbrief-kopf { display: flex; gap: 14px; align-items: center; margin-bottom: 8px; padding-right: 30px; }
+.steckbrief-wappen .gross { width: 72px; height: 72px; }
+.steckbrief-kopf h2 { margin: 0; font-size: 21px; line-height: 1.2; }
+.langname { color: var(--text-leise); font-size: 13px; }
+.liga-zeile { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 14px; }
+.liga-logo { height: 22px; width: auto; }
+
+.entwurf {
+  display: inline-block; margin-top: 6px;
+  background: var(--warn-hg); color: var(--warn-text);
+  font-size: 12px; padding: 1px 8px; border-radius: 6px;
+}
+
+.flagge {
+  width: 20px; height: 15px; vertical-align: -2px;
+  border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+  margin-right: 3px;
+}
+
+.abschnitt { border-top: 1px solid var(--linie); padding-top: 10px; margin-top: 14px; }
+.abschnitt h3 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-leise); }
+.abschnitt p { margin: 0 0 8px; }
+.abschnitt ul { margin: 0; padding-left: 18px; }
+.abschnitt li { margin-bottom: 4px; }
+
+.eckdaten { margin: 0; }
+.zeile { display: grid; grid-template-columns: 110px 1fr; gap: 8px; padding: 3px 0; }
+.zeile dt { color: var(--text-leise); font-size: 13px; }
+.zeile dd { margin: 0; }
+
+.fehlt { color: var(--text-leise); font-style: italic; font-size: 13px; }
+
+.stadion-bild { margin: 0 0 8px; }
+.stadion-bild img { width: 100%; border-radius: 8px; display: block; }
+.stadion-bild figcaption { font-size: 11px; color: var(--text-leise); }
+
+.knopf {
+  display: inline-block; padding: 5px 12px; border-radius: 8px;
+  background: var(--akzent); color: var(--akzent-text); text-decoration: none; font-size: 14px;
+}
+
+.beziehungen { list-style: none; padding: 0 !important; }
+.beziehungen li { padding: 4px 0; }
+.etikett {
+  font-size: 12px; background: var(--hg); border: 1px solid var(--linie);
+  border-radius: 6px; padding: 0 6px; white-space: nowrap;
+}
+.beschreibung { color: var(--text-leise); font-size: 14px; }
+
+.linkliste { list-style: none; padding: 0 !important; }
+.stand { margin-top: 18px; font-size: 12px; color: var(--text-leise); }
+.hinweis { padding: 10px; background: var(--warn-hg); color: var(--warn-text); border-radius: 8px; }
+
+/* ---------- Leaflet an Dunkelmodus anpassen ---------- */
+
+@media (prefers-color-scheme: dark) {
+  .leaflet-tile-pane { filter: brightness(.75) contrast(1.1) saturate(.8); }
+  .leaflet-bar a, .leaflet-control-attribution { background: var(--flaeche) !important; color: var(--text) !important; }
+  .leaflet-control-attribution a { color: var(--akzent); }
+}
+
+/* ---------- Schmale Bildschirme: Seitenleiste als Panel von unten ---------- */
+
+@media (max-width: 760px) {
+  :root { --kopf-hoehe: 104px; }
+  .kopf { gap: 8px 10px; }
+  .kopf-titel { font-size: 16px; }
+  .feld-suche { flex: 1; }
+  .feld-suche input { width: 100%; }
+  .feld > span { display: none; }
+  .liga-filter { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+  .liga-chip { flex: none; }
+
+  .seitenleiste {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 62%;
+    border-left: 0; border-top: 1px solid var(--linie);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 18px rgba(0,0,0,.2);
+    z-index: 900;
+    padding: 16px 16px 30px;
+  }
+}
