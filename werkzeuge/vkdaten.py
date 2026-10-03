@@ -26,9 +26,25 @@ def lesen(pfad):
         raise ValueError(f'{pfad}, Zeile {zeile}: ungültiges JSON – {fehler.msg}') from None
 
 
+def _formatieren(wert, einrueckung=0):
+    """Wie json.dumps(indent=2), aber kurze Objekte/Listen bleiben einzeilig."""
+    kompakt = json.dumps(wert, ensure_ascii=False)
+    if not isinstance(wert, (dict, list)) or (len(kompakt) + einrueckung <= 110 and kompakt.count('{') <= 1):
+        return kompakt
+    innen = ' ' * (einrueckung + 2)
+    if isinstance(wert, dict):
+        teile = [f'{innen}{json.dumps(k, ensure_ascii=False)}: {_formatieren(v, einrueckung + 2)}' for k, v in wert.items()]
+        klammern = '{}'
+    else:
+        teile = [f'{innen}{_formatieren(v, einrueckung + 2)}' for v in wert]
+        klammern = '[]'
+    if not teile:
+        return klammern
+    return klammern[0] + '\n' + ',\n'.join(teile) + '\n' + ' ' * einrueckung + klammern[1]
+
+
 def schreiben(pfad, kopf, daten, fuss):
-    rumpf = json.dumps(daten, ensure_ascii=False, indent=2)
-    Path(pfad).write_text(kopf + rumpf + '\n' + fuss, encoding='utf-8')
+    Path(pfad).write_text(kopf + _formatieren(daten) + '\n' + fuss, encoding='utf-8')
 
 
 def saisondateien():

@@ -11,6 +11,7 @@ Deutschland (3 Ligen), Niederlande (2), Dänemark (2), Norwegen, Schweden, Finnl
 ## Stand
 
 - 03.10.2026: Prototyp gebaut mit Bundesliga, 2. Bundesliga und Eredivisie (54 Vereine). Basisdaten und Trainer für alle, komplette Texte für 6 Mustervereine (VfB, Union, Schalke, St. Pauli, Ajax, PSV).
+- 03.10.2026: Bundesliga und 2. Bundesliga inhaltlich vervollständigt: Texte (Geschichte, Mentalität, Wissenswertes) für alle 36 Vereine, Trikotsponsoren 2026/27, Trainerstand inkl. Wechsel in Gladbach und Hannover. Offen sind noch die Eigentümer von 15 Zweitligisten. Die Eredivisie bleibt vorerst bei den Basisdaten.
 - 03.10.2026: Kurz auf CARTO-Kacheln umgestellt, dann zurück zu OpenStreetMap. Die Seite kommt auf den eigenen Server, dort tritt die OSM-Sperre für `file://`-Seiten nicht auf.
 
 ## Nächste Schritte
@@ -18,7 +19,9 @@ Deutschland (3 Ligen), Niederlande (2), Dänemark (2), Norwegen, Schweden, Finnl
 - [ ] Prototyp anschauen: Passen Bedienung, Cluster-Overlay und Seitenleiste?
 - [ ] Auf dem Mac `python3 werkzeuge/wikidata_abgleich.py` laufen lassen (Logos, Stadionbilder, Koordinaten)
 - [ ] Fehlende Wappen von Hand nach `assets/logos/vereine/` legen
-- [ ] Texte Liga für Liga ergänzen, jeweils mit `geprueft: true` abhaken
+- [ ] Bundesliga und 2. Bundesliga gegenlesen und mit `geprueft: true` abhaken
+- [ ] Eigentümerstruktur der restlichen Zweitligisten recherchieren
+- [ ] Texte Liga für Liga ergänzen (als Nächstes z.B. 3. Liga oder Eredivisie)
 - [ ] Nächste Ligen aufnehmen
 
 ## Notizen
