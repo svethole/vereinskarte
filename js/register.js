@@ -3,7 +3,7 @@
  *
  * Die Daten liegen bewusst als .js-Dateien vor (nicht als .json): Browser
  * erlauben kein fetch() von JSON über file://, ein <script>-Tag funktioniert
- * dagegen auch beim Öffnen per Doppelklick. Der Inhalt zwischen den Klammern
+ * dagegen auch beim lokalen Testen ohne Webserver. Der Inhalt zwischen den Klammern
  * ist trotzdem reines JSON, damit Werkzeuge (siehe werkzeuge/) ihn lesen und
  * schreiben können.
  */

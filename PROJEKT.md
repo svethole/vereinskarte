@@ -2,7 +2,7 @@
 
 ## Ziel
 
-Eine private, interaktive Karte europäischer Fußballvereine. Die Vereinswappen sitzen als Pins auf den Stadien. Ein Klick öffnet einen Steckbrief mit Eigentümer, Sponsor, Trainer, Geschichte, Mentalität und Fanszene, Derbys und Fanfreundschaften. Die Seite läuft ohne Server, die Spielzeiten sind als Archiv per Dropdown abrufbar.
+Eine private, interaktive Karte europäischer Fußballvereine. Die Vereinswappen sitzen als Pins auf den Stadien. Ein Klick öffnet einen Steckbrief mit Eigentümer, Sponsor, Trainer, Geschichte, Mentalität und Fanszene, Derbys und Fanfreundschaften. Die Seite ist rein statisch (kein PHP, keine Datenbank), die Spielzeiten sind als Archiv per Dropdown abrufbar.
 
 ## Zielumfang (22 Länder)
 
@@ -11,7 +11,7 @@ Deutschland (3 Ligen), Niederlande (2), Dänemark (2), Norwegen, Schweden, Finnl
 ## Stand
 
 - 03.10.2026: Prototyp gebaut mit Bundesliga, 2. Bundesliga und Eredivisie (54 Vereine). Basisdaten und Trainer für alle, komplette Texte für 6 Mustervereine (VfB, Union, Schalke, St. Pauli, Ajax, PSV).
-- 03.10.2026: Kartenkacheln von OpenStreetMap auf CARTO umgestellt, weil die OSM-Server Seiten blockieren, die per Doppelklick geöffnet werden.
+- 03.10.2026: Kurz auf CARTO-Kacheln umgestellt, dann zurück zu OpenStreetMap. Die Seite kommt auf den eigenen Server, dort tritt die OSM-Sperre für `file://`-Seiten nicht auf.
 
 ## Nächste Schritte
 
@@ -23,6 +23,6 @@ Deutschland (3 Ligen), Niederlande (2), Dänemark (2), Norwegen, Schweden, Finnl
 
 ## Notizen
 
-- Die Seite soll privat bleiben, weil die Logos markenrechtlich geschützt sind. GitHub Pages scheidet deshalb aus. Geöffnet wird lokal per Doppelklick auf `index.html`.
+- Die Seite soll privat bleiben, weil die Logos markenrechtlich geschützt sind. Sie kommt deshalb auf den eigenen Server, mit Passwortschutz statt GitHub Pages. Lokal testen mit `python3 -m http.server`.
 - Die Daten liegen als JSON-in-JS vor, eine Datei pro Saison. Für eine neue Saison die Datei kopieren und anpassen, die alte bleibt als Archiv. Details in der [README.md](README.md).
 - Politische Einordnungen von Fanszenen nur mit Belegen aufnehmen, keine pauschalen Etiketten.

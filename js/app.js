@@ -11,14 +11,12 @@
 
   const START_ANSICHT = { zentrum: [51.2, 8.5], zoom: 6 };
 
-  // Kartenkacheln von CARTO (basieren auf OpenStreetMap-Daten). Die Server von
-  // openstreetmap.org selbst blockieren Seiten, die per file:// geöffnet werden,
-  // weil dabei kein Referer mitgeschickt wird. CARTO erlaubt das ohne API-Schlüssel.
+  // Kartenkacheln von openstreetmap.org. Deren Nutzungsregeln verlangen einen
+  // Referer – die Seite muss daher über einen Webserver laufen; beim Öffnen
+  // per Doppelklick (file://) antworten die OSM-Server mit „403 Access blocked“.
   const KACHELN = {
-    hell: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    dunkel: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    namensnennung: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende ' +
-      '&copy; <a href="https://carto.com/attributions">CARTO</a>',
+    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    namensnennung: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende',
   };
   const GELADENE_DATEIEN = new Set();
 
@@ -115,13 +113,10 @@
   const karte = L.map('karte', { zoomControl: true, worldCopyJump: true })
     .setView(START_ANSICHT.zentrum, START_ANSICHT.zoom);
 
-  const dunkelModus = window.matchMedia('(prefers-color-scheme: dark)');
-  const kachelEbene = L.tileLayer(dunkelModus.matches ? KACHELN.dunkel : KACHELN.hell, {
-    maxZoom: 20,
-    subdomains: 'abcd',
+  L.tileLayer(KACHELN.url, {
+    maxZoom: 19,
     attribution: KACHELN.namensnennung,
   }).addTo(karte);
-  dunkelModus.addEventListener('change', (e) => kachelEbene.setUrl(e.matches ? KACHELN.dunkel : KACHELN.hell));
 
   const cluster = L.markerClusterGroup({
     maxClusterRadius: 44,          // ≈ Pin-Breite: zusammenfassen, sobald sich Pins überlappen
