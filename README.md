@@ -18,6 +18,8 @@ Direktlinks auf einzelne Vereine funktionieren über die Adresszeile, z. B. `ind
 - **Suche:** Filtert die Karte. Mit Enter springst Du zum ersten Treffer.
 - **Saison-Auswahl:** Zeigt den Stand einer früheren Spielzeit.
 
+Projektstand und nächste Schritte stehen in [PROJEKT.md](PROJEKT.md).
+
 ## Aufbau
 
 ```

@@ -11,7 +11,6 @@ Deutschland (3 Ligen), Niederlande (2), Dänemark (2), Norwegen, Schweden, Finnl
 ## Stand
 
 - 03.10.2026: Prototyp gebaut mit Bundesliga, 2. Bundesliga und Eredivisie (54 Vereine). Basisdaten und Trainer für alle, komplette Texte für 6 Mustervereine (VfB, Union, Schalke, St. Pauli, Ajax, PSV).
-
 - 03.10.2026: Kartenkacheln von OpenStreetMap auf CARTO umgestellt, weil die OSM-Server Seiten blockieren, die per Doppelklick geöffnet werden.
 
 ## Nächste Schritte
@@ -25,5 +24,5 @@ Deutschland (3 Ligen), Niederlande (2), Dänemark (2), Norwegen, Schweden, Finnl
 ## Notizen
 
 - Die Seite soll privat bleiben, weil die Logos markenrechtlich geschützt sind. GitHub Pages scheidet deshalb aus. Geöffnet wird lokal per Doppelklick auf `index.html`.
-- Die Daten liegen als JSON-in-JS vor, eine Datei pro Saison. Für eine neue Saison die Datei kopieren und anpassen, die alte bleibt als Archiv. Details im README des Repos.
+- Die Daten liegen als JSON-in-JS vor, eine Datei pro Saison. Für eine neue Saison die Datei kopieren und anpassen, die alte bleibt als Archiv. Details in der [README.md](README.md).
 - Politische Einordnungen von Fanszenen nur mit Belegen aufnehmen, keine pauschalen Etiketten.
