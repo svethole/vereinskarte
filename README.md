@@ -6,7 +6,7 @@ Die Seite kommt ganz ohne Server, Datenbank und Build-Schritt aus.
 
 ## Öffnen
 
-**Einfach `index.html` per Doppelklick öffnen.** Die Bibliotheken (Leaflet, MarkerCluster, Flaggen) liegen in `vendor/` im Projekt. Aus dem Internet kommen nur die Kartenkacheln von OpenStreetMap.
+**Einfach `index.html` per Doppelklick öffnen.** Die Bibliotheken (Leaflet, MarkerCluster, Flaggen) liegen in `vendor/` im Projekt. Aus dem Internet kommen nur die Kartenkacheln. Die stammen von CARTO und beruhen auf OpenStreetMap-Daten. Die Kachelserver von openstreetmap.org selbst sperren Seiten, die per Doppelklick geöffnet werden. Welcher Anbieter benützt wird, steht oben in `js/app.js` (`KACHELN`).
 
 Direktlinks auf einzelne Vereine funktionieren über die Adresszeile, z. B. `index.html#2026-27/vfb-stuttgart`.
 
@@ -99,6 +99,6 @@ Der Abgleich fasst **nur Basisdaten** an: Wikidata-ID, fehlende Wikipedia-Titel,
 
 ## Rechtliches
 
-Die Seite ist für den **privaten Gebrauch** gedacht. Vereins- und Ligalogos sind markenrechtlich geschützt und sollten nicht öffentlich ins Netz gestellt werden. Stadionbilder von Wikimedia Commons stehen unter freien Lizenzen, deshalb zeigt die Seite den Bildnachweis jeweils mit an. Kartendaten © OpenStreetMap-Mitwirkende.
+Die Seite ist für den **privaten Gebrauch** gedacht. Vereins- und Ligalogos sind markenrechtlich geschützt und sollten nicht öffentlich ins Netz gestellt werden. Stadionbilder von Wikimedia Commons stehen unter freien Lizenzen, deshalb zeigt die Seite den Bildnachweis jeweils mit an. Kartendaten © OpenStreetMap-Mitwirkende, Kartenkacheln © CARTO. Die CARTO-Basiskarten sind für nicht-kommerzielle Nutzung in kleinem Umfang ohne Schlüssel freigegeben.
 
 Fremdbibliotheken: [Leaflet](https://leafletjs.com) (BSD-2), [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) (MIT), [flag-icons](https://github.com/lipis/flag-icons) (MIT). Die Lizenztexte liegen in `vendor/`.

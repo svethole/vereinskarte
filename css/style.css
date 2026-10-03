@@ -254,7 +254,6 @@ img.cluster-wappen { background: #fff; }
 /* ---------- Leaflet an Dunkelmodus anpassen ---------- */
 
 @media (prefers-color-scheme: dark) {
-  .leaflet-tile-pane { filter: brightness(.75) contrast(1.1) saturate(.8); }
   .leaflet-bar a, .leaflet-control-attribution { background: var(--flaeche) !important; color: var(--text) !important; }
   .leaflet-control-attribution a { color: var(--akzent); }
 }
